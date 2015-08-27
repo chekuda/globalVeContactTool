@@ -231,9 +231,57 @@ div#overlay{
 #globalChose{
 	width: 100%;
     height: 100%;
-    background-color: #E6FF00;
+    background-color: #8594A5;
     top: 0px;
     bottom: 0px;
     position: fixed;
     opacity: 0.5;
+    z-index: 1;
+}
+
+.countryButton{
+	display:       inline-block;
+	padding:       50px 50px;
+	background:    #1f1d1d url('http://dabuttonfactory.com/button.png?w=1&h=124&bgt=gradient&bgc=68b646&ebgc=1f1d1d') repeat-x;
+	background:    -moz-linear-gradient(#68b646, #1f1d1d);
+	background:    -o-linear-gradient(#68b646, #1f1d1d);
+	background:    -webkit-linear-gradient(#68b646, #1f1d1d);
+	background:    linear-gradient(#68b646, #1f1d1d);
+	border:        2px solid #569;
+	border-radius: 5px;
+	color:         #fff;
+	font:          normal 700 24px/1 "Calibri", sans-serif;
+	text-align:    center;
+	text-shadow:   1px 1px 0 #000;
+	z-index: 2;
+    position: fixed;
+    cursor: pointer;
+}
+.countryButton:hover{
+	background:    #1f1d1d url('http://dabuttonfactory.com/button.png?w=1&h=124&bgt=gradient&bgc=68b646&ebgc=1f1d1d') repeat-x;
+	background:    -moz-linear-gradient(#1f1d1d,#68b646);
+	background:    -o-linear-gradient(#1f1d1d,#68b646);
+	background:    -webkit-linear-gradient(#1f1d1d,#68b646);
+	background:    linear-gradient(#1f1d1d,#68b646);
+}
+
+.countryButton.hkbutton{
+	
+	top: 140px;
+    right: 50%;
+
+}
+
+.countryButton.ausbutton{
+	
+	top: 300px;
+    right: 70%;
+
+}
+
+.countryButton.jpbutton{
+	
+	top: 300px;
+    right: 30%;
+
 }

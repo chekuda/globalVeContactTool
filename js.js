@@ -2,10 +2,35 @@ document.onclick = function() {
     
 };
 
+
+
     
     window.onload= function ()
     {
+        
+        //Global Variable for the country selected on firspage
+        var countrSelected;
+    	//************country selection*********
+    	//
+		//
 		
+		$(".countryButton").on('click',countrySelection);
+
+		function countrySelection()
+		{
+			
+			
+				var country = $(this).text();
+				countrSelected =country;
+
+				//hiding global overlay
+				$(".countryButton").css({"visibility":"hidden", "display":"none"});
+				$("#globalChose").css({"visibility":"hidden", "display":"none"});
+				
+			
+		}
+		
+    	
 		
 		//************Open float helper************
 		//
@@ -186,8 +211,9 @@ document.onclick = function() {
 	
         function displayCode()
         {
-                 
-				
+             
+
+			
 			var merchantName = document.getElementById('Merchant').value;
 			var preview = document.getElementById('preview').value;
 			var linksG = document.getElementById('linksG').value;
@@ -248,20 +274,49 @@ document.onclick = function() {
 						}
 				//****************************************************************
 				//
-				//
+				
+				
+				
+                //****Checking the gobal variable for choise the right templates
                         
                         var selection = document.querySelector("input[name='standard']:checked").value;
-                        var selectionKeyGen = {
-                            '1': 'standard1Gen.html',
-                            '2': 'standard2Gen.html',
-                            '3': 'standard3Gen.html',
-                            '4': 'dach.html'};
-                
-                        var selectionKeyPF = {
-                            '1': 'standard1pf.html',
-                            '2': 'standard2pf.html',
-                            '3': 'standard3pf.html',
-                            '4': 'dachpf.html'};
+                        if(countrSelected == "HK")
+	                        {
+	                        	var selectionKeyGen = {
+	                            '1': 'standard1GenAsia.html',
+	                            '3': 'standard3GenAsia.html',
+	                            };
+	                
+	                        var selectionKeyPF = {
+	                            '1': 'standard1pfAsia.html',
+	                            '3': 'standard3pfAsia.html',
+	                            };
+	                        }
+	                    else if(countrSelected == "AU")
+		                    {
+		                    	var selectionKeyGen = {
+	                            '1': 'standard1GenAustralia.html',
+	                            '3': 'standard3GenAustralia.html',
+	                            };
+	                
+	                        var selectionKeyPF = {
+	                            '1': 'standard1pfAustralia.html',
+	                            '3': 'standard3pfAustralia.html',};
+		                    }
+		                else if(countrSelected == "JP")
+		                    {
+		                    	var selectionKeyGen = {
+	                            '1': 'standard1GenJp.html',
+	                            '3': 'standard3GenJp.html',
+	                            };
+	                
+	                        var selectionKeyPF = {
+	                            '1': 'standard1pfJp.html',
+	                            '3': 'standard3pfJp.html',};
+		                    }
+		                   else{console.log("Erron getting the country");}
+                        
+                        console.log("the country slected is: " + countrSelected+ "->Gen: "+selectionKeyGen[selection]+",->PF: "+selectionKeyPF[selection]);
                             
                 //llamo al servidor donde tengo el archivo Gen
                 $.ajax({
