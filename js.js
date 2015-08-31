@@ -75,6 +75,10 @@ document.onclick = function() {
 		function clickedPF()
 		{
 			var standardSelected = document.querySelector("input[name='standard']:checked").value;
+			if( standardSelected == 2 || standardSelected == 4)
+			{
+				alert("Standard"+standardSelected+" is not available yet");
+			}
 			if(document.querySelector('#checkPF:checked'))
 			{
 
@@ -227,13 +231,21 @@ document.onclick = function() {
 			var textPF2 = document.getElementById('Textpf2').value;
 			var disclaimer = document.getElementById('disclaimer').value;
 			var socialLink1,socialLink2,socialLink3,cursor1,cursor2,cursor3;
-			//check if the mandatory fields
+			//***********check if the mandatory fields********
 			//
+			//mandatory for Gen
 			if(!merchantName || !linksG || !imagesGen || !disclaimer){
 				alert("Don't forget the mandatory field");
+			}//mandatory for PF
+			else if(document.querySelector("#checkPF:checked"))
+			{
+				if(!linksPF || !imagesPF || !textPF)
+				{
+					alert("Don't forget the mandatory field");
+				}
 			}
 
-			else{
+			else{//****if everything is ok with mandatory fields
 				
 				if(socialBackGround == "")
 					{
