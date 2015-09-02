@@ -199,6 +199,10 @@ textarea{
 	visibility:hidden;
 	display:none;
 }
+#basketLine{
+	width: 145px;
+	
+}
 
 .radiotype{
 	padding-left: 34%;
