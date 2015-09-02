@@ -88,6 +88,8 @@ document.onclick = function() {
 				
 				//line PF
 				$("#basketLinePF").css({"visibility":"visible", "display":"block"})
+				//topbasket
+				$("#basketText").css({"visibility":"visible", "display":"inline-block"})
 				
 				//links 
 				$("#linksG").css("width","145");
@@ -115,7 +117,8 @@ document.onclick = function() {
 					
 					//line PF
 					$("#basketLinePF").css({"visibility":"hidden", "display":"none"})
-				
+					//topbasket
+					$("#basketText").css({"visibility":"hidden", "display":"none"})
 
 					//links 
 					$("#linksG").css("width","310");
@@ -225,6 +228,7 @@ document.onclick = function() {
 			var imagesGen = document.getElementById('pahtGen').value;
 			var imagesPF = document.getElementById('pathPF').value;
 			var colorLine =  document.getElementById('basketLine').value;
+			var basketText = document.getElementById('basketText').value;
 			var socialBackGround = document.getElementById('headerText').value;
 			var textGen = document.getElementById('genTex').value;
 			var textPF = document.getElementById('Textpf').value;
@@ -237,12 +241,10 @@ document.onclick = function() {
 			if(!merchantName || !linksG || !imagesGen || !disclaimer){
 				alert("Don't forget the mandatory field");
 			}//mandatory for PF
-			else if(document.querySelector("#checkPF:checked"))
+			if(document.querySelector("#checkPF:checked") && (!linksPF || !imagesPF || !textPF))
 			{
-				if(!linksPF || !imagesPF || !textPF)
-				{
 					alert("Don't forget the mandatory field");
-				}
+			
 			}
 
 			else{//****if everything is ok with mandatory fields
@@ -292,15 +294,27 @@ document.onclick = function() {
                 //****Checking the gobal variable for choise the right templates
                         
                         var selection = document.querySelector("input[name='standard']:checked").value;
+                        //checking if there are social links
+                        if(selection == 1)
+                        {
+
+                        	if(!document.getElementById('social1').value && !document.getElementById('social2').value && !document.getElementById('social1').value)
+                        	{//if there are not any social link, pick the template with no socials
+                        		selection = 2;
+                        	}
+                        }
+
                         if(countrSelected == "HK")
 	                        {
 	                        	var selectionKeyGen = {
 	                            '1': 'standard1GenAsia.html',
+	                            '2': 'standard1GenAsiaNoSocial.html',
 	                            '3': 'standard3GenAsia.html',
 	                            };
 	                
 	                        var selectionKeyPF = {
 	                            '1': 'standard1pfAsia.html',
+	                            '2': 'standard1pfAsiaNoSocials.html',
 	                            '3': 'standard3pfAsia.html',
 	                            };
 	                        }
@@ -333,7 +347,7 @@ document.onclick = function() {
                 //llamo al servidor donde tengo el archivo Gen
                 $.ajax({
                             //esta URL me cojera la url donde tengo el archivo ./standard.html
-                            url: './Gen/'+ 'standard1GenAsia.html',//selectionKeyGen[selection],
+                            url: './Gen/'+ selectionKeyGen[selection],
                             //si la conexion esta bien hecha entro en success
                             success: function(data)
                             {
@@ -357,7 +371,7 @@ document.onclick = function() {
                             {
                             //primero paso el el archivo a compiled y luego lo sustituyo por los datos
                     var compiled = _.template(data);
-                    text = compiled({HOMEPAGELINK: linksPF,PREVIEWTEXT: preview, MERCHANTNAME: merchantName, ImageKey: imagesPF, PFTEXTCONTENT1: textPF,PFTEXTCONTENT2: textPF2,COLOURLINE: colorLine,DISCLAIMER: disclaimer,BGCOLORSOCIALLINKS: socialBackGround, SOCIALLINK1: socialLink1,SOCIALLINK2:socialLink2,SOCIALLINK3:socialLink3, CURSOR1: cursor1,CURSOR2: cursor2,CURSOR3: cursor3});
+                    text = compiled({HOMEPAGELINK: linksPF,PREVIEWTEXT: preview, MERCHANTNAME: merchantName, ImageKey: imagesPF, PFTEXTCONTENT1: textPF,PFTEXTCONTENT2: textPF2,COLOURLINE: colorLine,TOPBASKET: basketText,DISCLAIMER: disclaimer,BGCOLORSOCIALLINKS: socialBackGround, SOCIALLINK1: socialLink1,SOCIALLINK2:socialLink2,SOCIALLINK3:socialLink3, CURSOR1: cursor1,CURSOR2: cursor2,CURSOR3: cursor3});
                     document.getElementById('PFText').innerHTML = text;
                             }, 
                             error: function() {
