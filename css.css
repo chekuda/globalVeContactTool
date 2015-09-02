@@ -269,21 +269,16 @@ div#overlay{
 	background:    linear-gradient(#1f1d1d,#68b646);
 }
 
-.countryButton.hkbutton{
-	
-	top: 140px;
-    right: 50%;
 
-}
 
-.countryButton.ausbutton{
+.countryButton.globalbutton{
 	
 	top: 300px;
     right: 70%;
 
 }
 
-.countryButton.jpbutton{
+.countryButton.hkbutton{
 	
 	top: 300px;
     right: 30%;

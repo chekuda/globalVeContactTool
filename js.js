@@ -10,9 +10,12 @@ document.onclick = function() {
         
         //Global Variable for the country selected on firspage
         var countrSelected;
+        
+        
     	//************country selection*********
     	//
 		//
+
 		
 		$(".countryButton").on('click',countrySelection);
 
@@ -22,6 +25,13 @@ document.onclick = function() {
 			
 				var country = $(this).text();
 				countrSelected =country;
+
+				//disable topbasket text if the country is not HK
+				//
+				if(countrSelected =="GB")
+					{
+						document.getElementById("basketText").disabled = true;
+					}
 
 				//hiding global overlay
 				$(".countryButton").css({"visibility":"hidden", "display":"none"});
@@ -318,28 +328,20 @@ document.onclick = function() {
 	                            '3': 'standard3pfAsia.html',
 	                            };
 	                        }
-	                    else if(countrSelected == "AU")
+	                    else if(countrSelected == "GB")
 		                    {
+		                    	
+
 		                    	var selectionKeyGen = {
-	                            '1': 'standard1GenAustralia.html',
-	                            '3': 'standard3GenAustralia.html',
+	                            '1': 'standard1GenGlobal.html',
+	                            '2': 'standard1GenNoSocialGlobal.html',
 	                            };
 	                
 	                        var selectionKeyPF = {
-	                            '1': 'standard1pfAustralia.html',
-	                            '3': 'standard3pfAustralia.html',};
+	                            '1': 'standard1pfGlobal.html',
+	                            '2': 'standard1pfNoSocialsGlobal.html',};
 		                    }
-		                else if(countrSelected == "JP")
-		                    {
-		                    	var selectionKeyGen = {
-	                            '1': 'standard1GenJp.html',
-	                            '3': 'standard3GenJp.html',
-	                            };
-	                
-	                        var selectionKeyPF = {
-	                            '1': 'standard1pfJp.html',
-	                            '3': 'standard3pfJp.html',};
-		                    }
+		                
 		                   else{console.log("Erron getting the country");}
                         
                         console.log("the country slected is: " + countrSelected+ "->Gen: "+selectionKeyGen[selection]+",->PF: "+selectionKeyPF[selection]);
@@ -365,7 +367,7 @@ document.onclick = function() {
                 //llamo al servidor donde tengo el archivo PF
                 $.ajax({
                             //esta URL me cojera la url donde tengo el archivo ./standard.html
-                            url: './PF/'+ 'standard1pfAsia.html',
+                            url: './PF/'+ selectionKeyPF[selection],
                             //si la conexion esta bien hecha entro en success
                             success: function(data)
                             {
